@@ -7,8 +7,8 @@ import utils
 
 if __name__ == "__main__":
     # data
-    data = utils.EvalDataset("data/alpaca-val-10k.json")
-    data_len = utils.jload("data/alpaca-val-10k-length.json")
+    data = utils.EvalDataset("../data/alpaca-val-10k.json")
+    data_len = utils.jload("../data/alpaca-val-10k-length.json")
     temp = [0.0, 0.3, 0.5, 0.7]
 
     for i in range(len(data)):
