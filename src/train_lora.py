@@ -40,6 +40,10 @@ from fastchat.train.train import (
 
 # replace_llama_attn_with_flash_attn()
 
+from monkeypatch.peft_tuners_lora_monkey_patch import (
+            replace_peft_model_with_gptq_lora_model
+        )
+replace_peft_model_with_gptq_lora_model()
 
 @dataclass
 class LoraArguments:
@@ -100,7 +104,7 @@ def train():
         lora_args,
     ) = parser.parse_args_into_dataclasses()
     print("training_args.local_rank ", training_args.local_rank )
-    model = transformers.LlamaForCausalLM.from_pretrained(
+    model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,
         device_map = "auto",
