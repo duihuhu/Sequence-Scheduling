@@ -24,7 +24,6 @@ if __name__ == "__main__":
         max_gpu_memory= None,
         load_8bit=None,
         cpu_offloading=None,
-        temperature=0.7,
         gptq_config=GptqConfig(
             ckpt=None,
             wbits=16,
@@ -32,11 +31,8 @@ if __name__ == "__main__":
             act_order=None,
         ),
         revision="main",
-        judge_sent_end=False,
         debug=None,
     )
-    
-
     # # model
     # model, tokenizer = load_model(
     #     "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
