@@ -24,7 +24,6 @@ if __name__ == "__main__":
         max_gpu_memory= None,
         load_8bit=None,
         cpu_offloading=None,
-        conv_template=None,
         temperature=0.7,
         gptq_config=GptqConfig(
             ckpt=None,
