@@ -4,9 +4,10 @@ import transformers
 from fastchat.serve.inference import load_model
 from peft import PeftModel
 import utils
-
+from fastchat.serve.cli import GptqConfig
 
 if __name__ == "__main__":
+    model_path = "/workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module/model"
     # data
     data = utils.EvalDataset("../data/alpaca-val-10k.json")
     data_len = utils.jload("../data/alpaca-val-10k-length.json")
@@ -15,29 +16,50 @@ if __name__ == "__main__":
     for i in range(len(data)):
         assert data[i]["id"] == data_len[i]["id"], f"{data[i]['id']} != {data_len[i]['id']}"
         data_len[i]["L_max"] = max([data_len[i][f"L_t{t}"] for t in temp])
+    
+    length_predictor, tokenizer = load_model(
+        model_path,
+        device='cuda',
+        num_gpus=1,
+        max_gpu_memory= None,
+        load_8bit=None,
+        cpu_offloading=None,
+        conv_template=None,
+        temperature=0.7,
+        gptq_config=GptqConfig(
+            ckpt=None,
+            wbits=16,
+            groupsize=-1,
+            act_order=None,
+        ),
+        revision="main",
+        judge_sent_end=False,
+        debug=None,
+    )
+    
 
-    # model
-    model, tokenizer = load_model(
-        "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
-        "cuda",
-        1,
-        load_8bit=True,
-        debug=False,
-    )
-    tokenizer = transformers.AutoTokenizer.from_pretrained(
-        "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
-        padding_side="right",
-        use_fast=False,
-    )
-    tokenizer.pad_token = tokenizer.unk_token
-    tokenizer.padding_side = "left"
+    # # model
+    # model, tokenizer = load_model(
+    #     "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
+    #     "cuda",
+    #     1,
+    #     load_8bit=True,
+    #     debug=False,
+    # )
+    # tokenizer = transformers.AutoTokenizer.from_pretrained(
+    #     "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
+    #     padding_side="right",
+    #     use_fast=False,
+    # )
+    # tokenizer.pad_token = tokenizer.unk_token
+    # tokenizer.padding_side = "left"
 
-    # LORA
-    load_lora = "/workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module/lora"
-    length_predictor = PeftModel.from_pretrained(
-        model, load_lora, torch_dtype=torch.float16
-    )
-    print(f"Loaded LORA length predictor {load_lora}")
+    # # LORA
+    # load_lora = "/workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module/lora"
+    # length_predictor = PeftModel.from_pretrained(
+    #     model, load_lora, torch_dtype=torch.float16
+    # )
+    # print(f"Loaded LORA length predictor {load_lora}")
 
     # Prompt
     PROMPT_QUERY = "\nDon't output the response for the above instruction. Instead, you need to predict the number of tokens in your response. Output one number only."
