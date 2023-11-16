@@ -1,4 +1,4 @@
-python -m src.train_lora \
+python -m src.train_lora_offical \
    --model_name_or_path ./ckpts/vicuna-7b \
     --data_path ./data/alpaca-train-10k-instruct.json \
     --output_dir ./ckpts/vicuna-response-length-perception-module \
