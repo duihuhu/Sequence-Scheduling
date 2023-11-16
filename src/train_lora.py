@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 import logging
 import pathlib
 import typing
-
+import torch
 from deepspeed import zero
 from deepspeed.runtime.zero.partition_parameters import ZeroParamStatus
 from peft import LoraConfig, get_peft_model
@@ -102,6 +102,8 @@ def train():
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,
+        load_in_8bit=True,
+        torch_dtype=torch.float16,
     )
     lora_config = LoraConfig(
         r=lora_args.lora_r,

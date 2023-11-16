@@ -2,8 +2,8 @@ python -m src.train_lora \
    --model_name_or_path ./ckpts/vicuna-7b \
     --data_path ./data/alpaca-train-10k-instruct.json \
     --output_dir ./ckpts/vicuna-response-length-perception-module \
-    --bf16 True \
-    --tf32 True \
+    --bf16 False \
+    --tf32 False \
     --evaluation_strategy "no" \
     --lazy_preprocess True \
     --save_strategy "steps" \
