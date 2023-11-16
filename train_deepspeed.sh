@@ -1,4 +1,4 @@
-deepspeed --include localhost:0 /src/train_lora.py \
+deepspeed --include localhost:0 /workspace/Sequence-Scheduling/src/train_lora.py \
    --model_name_or_path ./ckpts/vicuna-7b \
     --data_path ./data/alpaca-train-10k-instruct_part.json \
     --output_dir ./ckpts/vicuna-response-length-perception-module \
