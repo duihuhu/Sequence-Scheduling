@@ -17,14 +17,14 @@ if __name__ == "__main__":
 
     # model
     model, tokenizer = load_model(
-        "./ckpts/vicuna-7b",
+        " /workspace/Sequence-Scheduling/ckpts/vicuna-7b",
         "cuda",
         1,
         load_8bit=False,
         debug=False,
     )
     tokenizer = transformers.AutoTokenizer.from_pretrained(
-        "./ckpts/vicuna-7b",
+        " /workspace/Sequence-Scheduling/ckpts/vicuna-7b",
         padding_side="right",
         use_fast=False,
     )
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     tokenizer.padding_side = "left"
 
     # LORA
-    load_lora = "./ckpts/vicuna-response-length-perception-module"
+    load_lora = " /workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module"
     length_predictor = PeftModel.from_pretrained(
         model, load_lora, torch_dtype=torch.float16
     )
