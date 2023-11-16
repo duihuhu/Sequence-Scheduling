@@ -40,10 +40,6 @@ from fastchat.train.train import (
 
 # replace_llama_attn_with_flash_attn()
 
-from monkeypatch.peft_tuners_lora_monkey_patch import (
-            replace_peft_model_with_gptq_lora_model
-        )
-replace_peft_model_with_gptq_lora_model()
 
 @dataclass
 class LoraArguments:
