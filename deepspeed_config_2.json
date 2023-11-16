@@ -1,15 +1,6 @@
 {
   "optimizer": {
-    "type": "DeepSpeedCPUAdam",
-    "params": {
-      "lr": 0.001,
-      "betas": [
-        0.8,
-        0.999
-      ],
-      "eps": 1e-8,
-      "weight_decay": 3e-7
-    }
+    "type": "DeepSpeedCPUAdam"
   },
   "zero_optimization": {
     "stage": 2,
