@@ -101,10 +101,11 @@ def train():
         lora_args,
     ) = parser.parse_args_into_dataclasses()
     print("training_args.local_rank ", training_args.local_rank )
-    world_size = int(os.environ.get("WORLD_SIZE", 1))
-    ddp = world_size != 1
-    if ddp:
-        device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}
+    # device_map = "auto"
+    # world_size = int(os.environ.get("WORLD_SIZE", 1))
+    # ddp = world_size != 1
+    # if ddp:
+    device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}
     
     model = transformers.LlamaForCausalLM.from_pretrained(
         model_args.model_name_or_path,
