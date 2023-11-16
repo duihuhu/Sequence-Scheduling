@@ -18,14 +18,14 @@ if __name__ == "__main__":
 
     # model
     model, tokenizer = load_model(
-        "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
+        "/workspace/Sequence-Scheduling/ckpts/opt-125m",
         "cuda",
         1,
         load_8bit=True,
         debug=False,
     )
     tokenizer = transformers.AutoTokenizer.from_pretrained(
-        "/workspace/Sequence-Scheduling/ckpts/vicuna-7b",
+        "/workspace/Sequence-Scheduling/ckpts/opt-125m",
         padding_side="right",
         use_fast=False,
     )
