@@ -33,7 +33,7 @@ if __name__ == "__main__":
     tokenizer.padding_side = "left"
 
     # LORA
-    load_lora = "/workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module/lora"
+    load_lora = "/workspace/Sequence-Scheduling/ckpts/vicuna-response-length-perception-module"
     length_predictor = PeftModel.from_pretrained(
         model, load_lora, torch_dtype=torch.float16
     )
