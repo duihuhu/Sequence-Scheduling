@@ -1,5 +1,5 @@
 python -m src.train_lora \
-   --model_name_or_path ./ckpts/vicuna-7b \
+   --model_name_or_path ./ckpts/opt-125m \
     --data_path ./data/alpaca-train-10k-instruct_part.json \
     --output_dir ./ckpts/vicuna-response-length-perception-module \
     --bf16 False \
