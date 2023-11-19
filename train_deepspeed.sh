@@ -1,5 +1,5 @@
 deepspeed --include localhost:0 /workspace/Sequence-Scheduling/src/train_lora.py \
-   --model_name_or_path ./ckpts/opt-125m \
+   --model_name_or_path /workspace/stanford_alpaca/model \
     --data_path ./data/alpaca-train-10k-instruct_part.json \
     --output_dir ./ckpts/vicuna-response-length-perception-module \
     --bf16 False \

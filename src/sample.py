@@ -1,6 +1,6 @@
 import numpy as np
 
-from . import utils
+import utils
 
 if __name__ == '__main__':
     seed = 42
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     data_train = utils.jsort(data_train, key="id", integer=True)
     data_val = data[10000:]
     data_val = utils.jsort(data_val, key="id", integer=True)
-
-    # save to json
-    utils.jdump(data_train, "./data/alpaca-train-10k.json")
-    utils.jdump(data_val, "./data/alpaca-val-10k.json")
+    print(data_train)
+    # # save to json
+    # utils.jdump(data_train, "./data/alpaca-train-10k.json")
+    # utils.jdump(data_val, "./data/alpaca-val-10k.json")
